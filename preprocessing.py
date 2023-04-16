@@ -1,4 +1,4 @@
-#importing the package
+#import modul
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,13 +6,13 @@ import seaborn as sns
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import statsmodels.regression.linear_model as sm
 
-#importing the data
+#import data 
 dataset = pd.read_csv('data.csv')
 dataset= dataset.drop(['date','country','street','statezip'],axis=1).values
 
 
 
-#encoding categorical data
+#kode data kategori
 labelEncoder_X = LabelEncoder()
 dataset[:,13]= labelEncoder_X.fit_transform(dataset[:,13])
 onehotencoder = OneHotEncoder(categorical_features=[13])
@@ -60,7 +60,7 @@ data[data['price'] == 0].shape[0]
 #check what house that don't have price (price=0)
 data[data['price'] == 26590000]
 
-#what should you do?
+#Apa yang harus kamu lakukan?
 #in this case I will do something, drop value that not on range
 iqr = data['price'].describe()['75%'] - data['price'].describe()['25%']
 lower_bound = data['price'].describe()['25%'] - (1.5*iqr)
@@ -69,7 +69,7 @@ print("IQR equals {}".format(iqr))
 print("Lower bound of price is {}".format(lower_bound))
 print("Upper bound of price is {}".format(upper_bound))
 
-#just go on with data itself
+#Menampilkan data yang sudah diinputkan sebelumnya
 data_clean = data.copy()
 data_clean = data[(data.price > 0) & (data.price <= upper_bound)]
 data_clean.shape
